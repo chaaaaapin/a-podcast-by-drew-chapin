@@ -103,87 +103,11 @@
             margin: 0 auto;
         }
 
-        .form-group {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        input[type="email"] {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        input[type="email"]:focus {
-            background: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        input[type="email"]::placeholder {
-            color: #999;
-        }
-
-        button[type="submit"] {
-            padding: 1rem 2.5rem;
-            font-size: 1rem;
-            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-weight: 600;
-            border: none;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.9);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
-
-        button[type="submit"]:hover {
-            background: black;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        button[type="submit"]:active {
-            transform: translateY(0);
-        }
-
         .disclaimer {
             font-size: 0.875rem;
             opacity: 0.8;
             margin-top: 1rem;
             font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
-        .success-message {
-            display: none;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
-            border-radius: 5px;
-            margin-top: 1rem;
-            font-family: 'Avenir', 'Avenir Next', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        @media (max-width: 640px) {
-            .form-group {
-                flex-direction: column;
-            }
-
-            button[type="submit"] {
-                width: 100%;
-            }
         }
     </style>
 </head>
@@ -192,59 +116,18 @@
         <h1>a podcast</h1>
         <p class="byline">by drew chapin</p>
 
-        <form class="signup-form" data-members-form="subscribe">
-            <div class="form-group">
-                <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    data-members-email
-                    placeholder="your email"
-                    required
-                    aria-label="Email address"
-                >
-                <button type="submit">
-                    <span data-members-label>Sign Up</span>
-                </button>
-            </div>
+        <!-- Ghost Signup Form -->
+        <div class="signup-form">
+            <script src="https://cdn.jsdelivr.net/ghost/signup-form@~0.3/umd/signup-form.min.js"
+                data-button-color="rgba(0, 0, 0, 0.9)"
+                data-button-text-color="#FFFFFF"
+                data-site="https://chapin.io/"
+                data-locale="en"
+                data-label-1=""
+                async>
+            </script>
             <p class="disclaimer">No spam. Unsubscribe anytime.</p>
-            <div class="success-message" data-members-success>
-                thanks, we'll be in touch when we're ready to launch!
-            </div>
-        </form>
+        </div>
     </div>
-
-    <!-- Ghost Portal Script -->
-    <script data-ghost="https://chapin.io/" crossorigin="anonymous"></script>
-    <script>
-        // Initialize Ghost Portal
-        window.addEventListener('load', function() {
-            if (window.GhostMembers) {
-                window.GhostMembers.init({
-                    site: 'https://chapin.io'
-                });
-            }
-        });
-
-        // Handle form submission and show success message
-        const form = document.querySelector('[data-members-form]');
-        const successMessage = document.querySelector('.success-message');
-        const formGroup = document.querySelector('.form-group');
-
-        if (form && successMessage) {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const email = form.querySelector('input[type="email"]').value;
-
-                // Hide form, show success
-                formGroup.style.display = 'none';
-                successMessage.classList.add('show');
-
-                // Submit to Ghost in background (optional - remove if not needed)
-                // The form will handle its own submission via Ghost Portal
-            });
-        }
-    </script>
 </body>
 </html>
