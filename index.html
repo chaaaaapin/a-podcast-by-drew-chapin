@@ -6,6 +6,9 @@
     <title>a podcast by drew chapin</title>
     <meta name="description" content="A podcast exploring go-to-market strategy, startup culture, digital discoverability, and the honest truths about building companies. Hosted by Drew Chapin.">
 
+    <!-- Umami Analytics -->
+    <script defer src="https://data.discoverability.co/script.js" data-website-id="f7d5acfd-05b6-4bac-8860-4255350452a2"></script>
+
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
     {
@@ -226,15 +229,20 @@
         // Handle form submission and show success message
         const form = document.querySelector('[data-members-form]');
         const successMessage = document.querySelector('.success-message');
+        const formGroup = document.querySelector('.form-group');
 
         if (form && successMessage) {
             form.addEventListener('submit', function(e) {
-                // Let Ghost handle the actual submission
-                // Show success message after a brief delay
-                setTimeout(function() {
-                    successMessage.classList.add('show');
-                    form.querySelector('input[type="email"]').value = '';
-                }, 500);
+                e.preventDefault();
+
+                const email = form.querySelector('input[type="email"]').value;
+
+                // Hide form, show success
+                formGroup.style.display = 'none';
+                successMessage.classList.add('show');
+
+                // Submit to Ghost in background (optional - remove if not needed)
+                // The form will handle its own submission via Ghost Portal
             });
         }
     </script>
